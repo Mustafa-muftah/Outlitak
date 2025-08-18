@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Cairo', Arial, sans-serif;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.5;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white focus:ring-primary-500;
+  }
+  
+  .btn-sm {
+    @apply px-3 py-2 text-sm;
+  }
+  
+  .btn-md {
+    @apply px-6 py-3 text-base;
+  }
+  
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl transition-all duration-300;
+  }
+  
+  .card-default {
+    @apply shadow-md hover:shadow-lg;
+  }
+  
+  .card-feature {
+    @apply shadow-lg hover:shadow-xl hover:-translate-y-2 border border-gray-100;
+  }
+  
+  .card-contact {
+    @apply shadow-xl border border-gray-200;
+  }
+  
+  .form-input {
+    @apply w-full px-4 py-3 text-right border-2 rounded-lg transition-all duration-200 bg-white text-text-primary placeholder-transparent focus:outline-none focus:border-primary-500 border-gray-300;
+  }
+  
+  .form-label {
+    @apply absolute right-4 top-3 text-sm transition-all duration-200 text-text-secondary pointer-events-none;
+  }
+  
+  .form-error {
+    @apply mt-1 text-sm text-red-500 text-right;
+  }
+}
