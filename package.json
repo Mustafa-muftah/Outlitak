@@ -16,6 +16,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "appwrite": "^18.2.0",
     "firebase": "^12.1.0",
     "lucide-vue-next": "^0.539.0",
     "pinia": "^3.0.3",
@@ -43,7 +44,6 @@
     "vite": "^7.0.6",
     "vite-plugin-vue-devtools": "^8.0.0",
     "vue-tsc": "^3.0.4",
-     "firebase": "^12.1.0",
     "vue3-carousel": "^0.16.0"
   }
 }

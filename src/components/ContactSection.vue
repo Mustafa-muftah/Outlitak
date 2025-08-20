@@ -197,27 +197,6 @@
               </a>
             </div>
           </div>
-
-          <!-- Working Hours Section -->
-          <!-- <div class="card card-default p-8">
-            <h3 class="text-2xl font-bold text-text-primary mb-6">
-              أوقات العمل
-            </h3>
-            <div class="space-y-3">
-              <div class="flex justify-between">
-                <span class="text-text-secondary">الأحد - الخميس</span>
-                <span class="font-semibold text-text-primary">8:00 ص - 6:00 م</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-text-secondary">الجمعة</span>
-                <span class="font-semibold text-text-primary">9:00 ص - 2:00 م</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-text-secondary">السبت</span>
-                <span class="font-semibold text-text-primary">مغلق</span>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
@@ -227,15 +206,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Send, Mail, Phone, MapPin } from 'lucide-vue-next'
-import type { ContactFormData, ContactFormErrors, ServiceType } from '@/types'
+import type { ContactFormData, ContactFormErrors } from '@/types'
 import { validateContactForm, formatPhoneNumber } from '@/lib/utils'
-import { collection, addDoc, serverTimestamp, db } from '@/lib/firebase'
+import { databases, DATABASE_ID, CONTACTS_COLLECTION_ID } from '@/lib/appwrite'
+import { ID } from 'appwrite'
 
 const formData = ref<ContactFormData>({
   name: '',
   email: '',
   phone: '',
-  serviceType: '',
+  // serviceType: '',
   message: ''
 })
 
@@ -244,10 +224,6 @@ const isSubmitting = ref(false)
 const submitMessage = ref('')
 const submitMessageClass = ref('')
 
-const serviceTypes: ServiceType[] = [
-  { value: 'partnership', label: 'شراكة تجارية' },
-  { value: 'other', label: 'أخرى' }
-]
 
 const handleSubmit = async () => {
   // Clear previous errors and messages
@@ -266,13 +242,21 @@ const handleSubmit = async () => {
   try {
     // Format phone number if provided
     const submitData = {
-      ...formData.value,
+      name: formData.value.name,
+      email: formData.value.email,
       phone: formData.value.phone ? formatPhoneNumber(formData.value.phone) : '',
-      timestamp: serverTimestamp()
+      // serviceType: formData.value.serviceType,
+      message: formData.value.message,
+      // createdAt: new Date().toISOString()
     }
 
-    // Submit to Firebase
-    await addDoc(collection(db, 'contacts'), submitData)
+    // Submit to Appwrite
+    await databases.createDocument(
+      DATABASE_ID,
+      CONTACTS_COLLECTION_ID,
+      ID.unique(),
+      submitData
+    )
 
     // Success
     submitMessage.value = 'تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريباً.'
@@ -283,7 +267,7 @@ const handleSubmit = async () => {
       name: '',
       email: '',
       phone: '',
-      serviceType: '',
+      // serviceType: '',
       message: ''
     }
   } catch (error) {
