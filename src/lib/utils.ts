@@ -25,11 +25,25 @@ export const validateContactForm = (data: ContactFormData): ContactFormErrors =>
 };
 
 export const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId);
+  const element = document.getElementById(sectionId)
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    // Dynamically get the header height
+    const header = document.querySelector('header')
+    const headerHeight = header ? header.offsetHeight : 80
+    
+    // Calculate the position to scroll to
+    const elementPosition = element.offsetTop
+    const offsetPosition = elementPosition - headerHeight - 20 // Adding 20px extra padding
+    
+    // Smooth scroll to the calculated position
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
   }
-};
+}
+
+
 
 export const formatPhoneNumber = (phone: string): string => {
   // Remove all non-digit characters

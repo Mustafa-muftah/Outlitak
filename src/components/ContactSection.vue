@@ -21,7 +21,7 @@
                 v-model="formData.name"
                 type="text"
                 id="name"
-                class="form-input"
+                class="form-input peer"
                 :class="{ 'border-red-500': errors.name }"
                 placeholder=" "
                 required
@@ -40,7 +40,7 @@
                 v-model="formData.email"
                 type="email"
                 id="email"
-                class="form-input"
+                class="form-input peer"
                 :class="{ 'border-red-500': errors.email }"
                 placeholder=" "
                 required
@@ -59,7 +59,7 @@
                 v-model="formData.phone"
                 type="tel"
                 id="phone"
-                class="form-input"
+                class="form-input peer"
                 :class="{ 'border-red-500': errors.phone }"
                 placeholder=" "
               />
@@ -77,7 +77,7 @@
                 v-model="formData.message"
                 id="message"
                 rows="4"
-                class="form-input resize-none"
+                class="form-input peer resize-none"
                 :class="{ 'border-red-500': errors.message }"
                 placeholder=" "
                 required
@@ -224,7 +224,6 @@ const isSubmitting = ref(false)
 const submitMessage = ref('')
 const submitMessageClass = ref('')
 
-
 const handleSubmit = async () => {
   // Clear previous errors and messages
   errors.value = {}
@@ -279,3 +278,281 @@ const handleSubmit = async () => {
   }
 }
 </script>
+
+<style scoped>
+/* Enhanced Form Input Styling */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-top: 1.5rem;
+  font-size: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: white;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  direction: rtl;
+}
+
+.form-input::placeholder {
+  color: transparent;
+}
+
+.form-input:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.form-input:hover:not(:focus) {
+  border-color: #d1d5db;
+}
+
+/* Floating Label Styling */
+.form-label {
+  position: absolute;
+  right: 1rem;
+  top: 0.75rem;
+  color: rgba(12, 34, 55, 0.95);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+  background-color: white;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+  transform-origin: right center;
+}
+
+/* Label animation when input is focused or has value */
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label,
+.peer:focus ~ .form-label,
+.peer:not(:placeholder-shown) ~ .form-label {
+  top: -0.5rem;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(12, 34, 55, 0.95);
+  font-weight: 600;
+  background-color: white;
+  padding: 0 0.5rem;
+}
+
+/* Error state styling */
+.border-red-500 {
+  border-color: #ef4444 !important;
+}
+
+.border-red-500 + .form-label,
+.border-red-500:focus + .form-label,
+.border-red-500:not(:placeholder-shown) + .form-label {
+  color: #dc2626 !important;
+}
+
+/* Error message styling */
+.form-error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Textarea specific styling */
+textarea.form-input {
+  padding-top: 1.5rem;
+  padding-bottom: 0.75rem;
+  min-height: 120px;
+  resize: none;
+}
+
+/* Button styling */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #ea580c, #c2410c);
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #c2410c, #9a3412);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.group {
+  /* Group class for hover effects */
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn:disabled:hover {
+  background: linear-gradient(to right, #ea580c, #c2410c);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Utility classes */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.relative {
+  position: relative;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.h-5 {
+  height: 1.25rem;
+}
+
+.w-5 {
+  width: 1.25rem;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.border-white {
+  border-color: white;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.group-hover\:translate-x-1:hover {
+  transform: translateX(0.25rem);
+}
+
+/* Card styling */
+.card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+}
+
+.card-contact {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card-contact:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card-default {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+}
+
+/* Additional utility classes that were missing */
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.bg-green-50 {
+  background-color: #f0fdf4;
+}
+
+.text-green-800 {
+  color: #166534;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-green-200 {
+  border-color: #bbf7d0;
+}
+
+.bg-red-50 {
+  background-color: #fef2f2;
+}
+
+.text-red-800 {
+  color: #991b1b;
+}
+
+.border-red-200 {
+  border-color: #fecaca;
+}
+</style>
