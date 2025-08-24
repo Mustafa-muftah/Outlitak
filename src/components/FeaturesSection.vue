@@ -36,7 +36,7 @@
       </div>
 
       <!-- Brands Carousel -->
-      <div class="brands-carousel-container">
+      <div id="partner" class="brands-carousel-container ">
         <div class="text-center mb-12">
           <h3 class="text-2xl font-bold text-text-primary mb-4">
             شركاؤنا من أفضل الماركات

@@ -99,7 +99,7 @@ const isScrolled = ref(false)
 const navigationItems = [
   { id: 'hero', label: 'الرئيسية' },
   { id: 'features', label: 'الخدمات' },
-  { id: 'about', label: 'من نحن' },
+   {id:'partner', label: 'شركاؤنا'},
 ]
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 10
